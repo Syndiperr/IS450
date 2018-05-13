@@ -82,8 +82,8 @@ Public Class SaleService
             While reader.Read
                 invoices.Add(New Invoice With {
                     ._ID = CInt(reader("InvoiceID")),
-                    ._CustomerID = CInt(reader("CustomerID")),
-                    ._CompanyName = reader("CustomerName"),
+                    ._CustomerID = reader("CustomerID").ToString,
+                    ._CompanyName = reader("CustomerName").ToString,
                     ._ProductCost = CDec(reader("ProductCost")),
                     ._ShippingCost = CDec(reader("ShippingCost")),
                     ._Tax = CDec(reader("Tax")),
@@ -113,8 +113,8 @@ Public Class SaleService
             If reader.Read Then
                 invoice = New Invoice With {
                     ._ID = CInt(reader("InvoiceID")),
-                    ._CustomerID = CInt(reader("CustomerID")),
-                    ._CompanyName = reader("CustomerName"),
+                    ._CustomerID = reader("CustomerID").ToString,
+                    ._CompanyName = reader("CustomerName").ToString,
                     ._ProductCost = CDec(reader("ProductCost")),
                     ._ShippingCost = CDec(reader("ShippingCost")),
                     ._Tax = CDec(reader("Tax")),
