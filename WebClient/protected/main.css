@@ -10,7 +10,7 @@
 #content {
     margin: 0 auto;
     width: 80%;
-    height: 384px;
+    height: 440px;
 }
 
 #greenbar {
@@ -43,4 +43,8 @@
 
 .clear {
     clear: both;
+}
+
+table > tr > td {
+    padding-right: 100px;
 }

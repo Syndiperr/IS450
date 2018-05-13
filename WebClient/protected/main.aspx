@@ -30,6 +30,49 @@
             <br />
             Welcome &quot;<asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>&quot;!<br />
             <br />
+
+            <asp:Repeater ID="repeatProducts" runat="server" DataSourceID="WCFSaleService.ListProducts()">
+               
+                <headerTemplate>
+                    <table>
+                            <tr>
+                                <td>
+                                    <b>Product Name</b>
+                                </td>
+                                <td>
+                                    <b>Quantity Per Unit</b>
+                                </td>
+                                <td>
+                                    <b>Unit Price</b>
+                                </td>
+                                <td>
+                                    <b>Quantity (x1000) </b>
+                                </td>
+                            </tr>
+                        </table>
+                        </headerTemplate>
+
+                <ItemTemplate>
+                    <table>
+                        <tr>
+                            <td>
+                                <b><%# Eval("ProductName") %></b>
+                            </td>
+                            <td>
+                                <%# Eval("QuantityPerUnit") %>
+                            </td>
+                            <td>
+                                <%# Eval("UnitPrice") %>
+                            </td>
+                            <td>
+                               <asp:TextBox ID="TextBox1" runat="server" style="z-index: 1; left: 138px; top: 466px; position: absolute"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </table>
+                </ItemTemplate>
+
+            </asp:Repeater>
+            
         </div>
     </form>
 </body>
