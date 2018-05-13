@@ -90,6 +90,38 @@ Public Class SaleService
     End Function
 
     Public Function GetCustomer(_customerID As String) As Customer Implements ISaleService.GetCustomer
-        Throw New NotImplementedException()
+
+        ' Read the connection string from web.config
+        Dim conStr As String = ConfigurationManager.ConnectionStrings("connectionString").ConnectionString
+        Dim con As New SqlConnection(conStr)
+        Try
+            con.Open()
+            Dim selectStatement As String = "select * from Customers where CustomerID=@CustomerID"
+            Dim selectCmd As New SqlCommand(selectStatement, con)
+            selectCmd.Parameters.AddWithValue("@CustomerID", _customerID)
+            Dim reader As SqlDataReader = selectCmd.ExecuteReader
+
+            If reader.Read Then
+                Dim myCustomer As New Customer
+
+                myCustomer._ID = reader("CustomerID").ToString
+                myCustomer._CompanyName = reader("CompanyName").ToString
+                myCustomer._ContactName = reader("ContactName").ToString
+                myCustomer._Address = reader("Address").ToString
+                myCustomer._City = reader("City").ToString
+                myCustomer._State = reader("State").ToString
+                myCustomer._Zip = CInt(reader("Zip").ToString)
+                myCustomer._Phone = reader("Phone").ToString
+
+                Return myCustomer
+            End If
+
+        Catch ex As SqlException
+
+        Finally
+            con.Close()
+        End Try
+
+        Return Nothing
     End Function
 End Class
