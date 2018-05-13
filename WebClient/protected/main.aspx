@@ -5,19 +5,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="./main.css" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height: 479px">
-            <a href="ChangePassword.aspx">Change Password</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LoginStatus ID="LoginStatus1" runat="server" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div id="header">
+            <div class="left" style="color: blue;"><h1>Company Logo</h1></div>
+            <div class="right"><h1><asp:LoginStatus ID="LoginStatus1" runat="server" /></h1></div>
+            <div class="center" style="color: green;"><h1>Great Lakes Food Market</h1></div>
+            <div class="clear"></div>
+            <div class="left">Contact: </div>
+            <div class="right">Tel: </div>
+            <div class="center">Address: </div>
+            <div class="clear"></div>
+            <div id="greenbar"></div>
+        </div>
+        <div class="clear"></div>
+        <br />
+        <br />
+        <br />
+        <div id="content">
             <asp:LoginName ID="LoginName1" runat="server" />
             <br />
             <br />
             Welcome &quot;<asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>&quot;!<br />
-            <br />
-            This is password protected page. You only can access to this page by passing authentication!</div>
+        </div>
     </form>
 </body>
 </html>
