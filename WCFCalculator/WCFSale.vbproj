@@ -70,8 +70,8 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICalcService.vb" />
-    <Compile Include="CalculatorService.vb" />
+    <Compile Include="ISaleService.vb" />
+    <Compile Include="SaleService.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

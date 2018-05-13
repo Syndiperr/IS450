@@ -137,10 +137,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WCFCalculator\WCFCalculator.vbproj">
+    <ProjectReference Include="..\WCFCalculator\WCFSale.vbproj">
       <Project>{1a4f6f2f-d16c-42aa-a8db-326c61b5756f}</Project>
-      <Name>WCFCalculator</Name>
+      <Name>WCFSale</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

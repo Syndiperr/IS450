@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WCFCalculator", "WCFCalculator\WCFCalculator.vbproj", "{1A4F6F2F-D16C-42AA-A8DB-326C61B5756F}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WCFSale", "WCFCalculator\WCFSale.vbproj", "{1A4F6F2F-D16C-42AA-A8DB-326C61B5756F}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebHost", "WebHost\WebHost.vbproj", "{A14FFB71-E4F5-4270-A2DC-657E6B3CF3B3}"
 EndProject
