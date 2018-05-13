@@ -11,7 +11,7 @@ Public Interface ISaleService
     Function ListProducts() As List(Of Product)
 
     <OperationContract()>
-    Function ListInvoices() As List(Of Invoice)
+    Function ListInvoices(ByVal _customerID As String) As List(Of Invoice)
 
     <OperationContract()>
     Function GetInvoice(ByVal _customerID As String) As Invoice
@@ -52,6 +52,9 @@ Public Class Invoice
     Property _ProductCost As Decimal
     Property _ShippingCost As Decimal
     Property _Tax As Decimal
-    Property _Total As Decimal
     Property _CreationDate As Date
+
+    Public Function GetTotalCost() As Decimal
+        Return _ProductCost + _ShippingCost + _Tax
+    End Function
 End Class
