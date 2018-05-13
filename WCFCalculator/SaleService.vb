@@ -3,6 +3,7 @@
 Imports System.Collections.Generic
 Imports System.Configuration
 Imports System.Data.SqlClient
+Imports System
 
 Public Class SaleService
     Implements ISaleService
@@ -76,7 +77,7 @@ Public Class SaleService
             Dim selectCmd As New SqlCommand("SELECT * FROM Invoices WHERE CustomerID=@customerID ORDER BY InvoiceID DESC", connection)
             selectCmd.Parameters.AddWithValue("@customerID", _customerID)
 
-            Dim reader = selectCmd.ExecuteReader
+            Dim reader As SqlDataReader = selectCmd.ExecuteReader
 
             While reader.Read
                 invoices.Add(New Invoice With {
@@ -108,7 +109,7 @@ Public Class SaleService
             Dim selectCmd As New SqlCommand("SELECT * FROM Invoices WHERE CustomerID=@ID", connection)
             selectCmd.Parameters.AddWithValue("@ID", _customerID)
 
-            Dim reader = selectCmd.ExecuteReader
+            Dim reader As SqlDataReader = selectCmd.ExecuteReader
             If reader.Read Then
                 invoice = New Invoice With {
                     ._ID = CInt(reader("InvoiceID")),
