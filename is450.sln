@@ -10,6 +10,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebClient", "WebClient\", "{C0599AA8-950A-4ABC-B44C-47B43B66E6D8}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		ProjectReferences = "{1a4f6f2f-d16c-42aa-a8db-326c61b5756f}|WCFCalculator.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_62579"
 		Debug.AspNetCompiler.PhysicalPath = "WebClient\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62579\"

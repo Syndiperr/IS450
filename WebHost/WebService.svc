@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Service="WCFSale.SaleService" %>
+﻿<%@ ServiceHost Service="WCFCalculator.SaleService" %>

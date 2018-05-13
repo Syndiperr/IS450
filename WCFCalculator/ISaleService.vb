@@ -26,32 +26,54 @@ End Interface
 
 <DataContract()>
 Public Class Product
+    <DataMember()>
     Property _ID As Integer
+    <DataMember()>
     Property _Name As String
+    <DataMember()>
     Property _QuantityPerUnit As String
+    <DataMember()>
     Property _UnitPrice As Decimal
 End Class
 
 <DataContract()>
 Public Class Customer
+    <DataMember()>
     Property _ID As String
+    <DataMember()>
     Property _CompanyName As String
+    <DataMember()>
     Property _ContactName As String
+    <DataMember()>
     Property _Address As String
+    <DataMember()>
     Property _City As String
+    <DataMember()>
     Property _State As String
+    <DataMember()>
     Property _Zip As Integer
+    <DataMember()>
     Property _Phone As String
+
+    Public Function GetFullAddress() As String
+        Return _Address & ", " & _City & ", " & _State & ", " & _Zip
+    End Function
 End Class
 
 <DataContract()>
 Public Class Invoice
+    <DataMember()>
     Property _ID As Integer
     Property _CustomerID As String
+    <DataMember()>
     Property _CompanyName As String
+    <DataMember()>
     Property _ProductCost As Decimal
+    <DataMember()>
     Property _ShippingCost As Decimal
+    <DataMember()>
     Property _Tax As Decimal
+    <DataMember()>
     Property _CreationDate As Date
 
     Public Function GetTotalCost() As Decimal
