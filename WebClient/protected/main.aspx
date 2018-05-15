@@ -37,20 +37,20 @@
                 <headerTemplate>
                     <table>
                         <tr>
-                            <td><b>Product Name</b></td>
-                            <td><b>Quantity Per Unit</b></td>
-                            <td><b>Unit Price</b></td>
-                            <td><b>Quantity (x1000) </b></td>
+                            <td width="350"><b>Product Name</b></td>
+                            <td width="250"><b>Quantity Per Unit</b></td>
+                            <td width="150"><b>Unit Price</b></td>
+                            <td width="200"><b>Quantity (x1000) </b></td>
                         </tr>
                     </table>
                 </headerTemplate>
                 <ItemTemplate>
                     <table>
                         <tr>
-                            <td><b><%# Eval("_Name") %></b></td>
-                            <td><%# Eval("_QuantityPerUnit") %></td>
-                            <td><%# Eval("_UnitPrice") %></td>
-                            <td>
+                            <td width="300"><b><%# Eval("_Name") %></b></td>
+                            <td width="250"><%# Eval("_QuantityPerUnit") %></td>
+                            <td width="150"><%# Eval("_UnitPrice") %></td>
+                            <td width="200">
                                 <input id="Text1" name="<%# 1000000000 + Eval("_ID") %>" type="number" value="" />
                             </td>
                         </tr>
