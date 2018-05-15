@@ -53,6 +53,7 @@ Public Class SaleService
             Dim reader As SqlDataReader = selectCmd.ExecuteReader
             While reader.Read
                 _listProducts.Add(New Product With {
+                    ._ID = CInt(reader("ProductID").ToString),
                     ._Name = reader("ProductName").ToString,
                     ._QuantityPerUnit = reader("QuantityPerUnit").ToString,
                     ._UnitPrice = CDec(reader("UnitPrice").ToString)

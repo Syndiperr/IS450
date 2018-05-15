@@ -36,43 +36,29 @@
             <asp:Repeater ID="repeatProducts" runat="server">
                 <headerTemplate>
                     <table>
-                            <tr>
-                                <td>
-                                    <b>Product Name</b>
-                                </td>
-                                <td>
-                                    <b>Quantity Per Unit</b>
-                                </td>
-                                <td>
-                                    <b>Unit Price</b>
-                                </td>
-                                <td>
-                                    <b>Quantity (x1000) </b>
-                                </td>
-                            </tr>
-                        </table>
-                        </headerTemplate>
+                        <tr>
+                            <td><b>Product Name</b></td>
+                            <td><b>Quantity Per Unit</b></td>
+                            <td><b>Unit Price</b></td>
+                            <td><b>Quantity (x1000) </b></td>
+                        </tr>
+                    </table>
+                </headerTemplate>
                 <ItemTemplate>
                     <table>
                         <tr>
+                            <td><b><%# Eval("_Name") %></b></td>
+                            <td><%# Eval("_QuantityPerUnit") %></td>
+                            <td><%# Eval("_UnitPrice") %></td>
                             <td>
-                                <b><%# Eval("_Name") %></b>
-                            </td>
-                            <td>
-                                <%# Eval("_QuantityPerUnit") %>
-                            </td>
-                            <td>
-                                <%# Eval("_UnitPrice") %>
-                            </td>
-                            <td>
-                               <asp:TextBox ID="TextBox1" runat="server" style="z-index: 1; left: 138px; top: 466px; position: absolute"></asp:TextBox>
+                                <input id="Text1" name="<%# 1000000000 + Eval("_ID") %>" type="number" value="" />
                             </td>
                         </tr>
                     </table>
                 </ItemTemplate>
-
             </asp:Repeater>
-            
+            <div class="clear"></div>
+            <asp:Button ID="btnCheckout" runat="server" Text="Check Out" />
         </div>
     </form>
 </body>

@@ -34,6 +34,12 @@ Public Class Product
     Property _QuantityPerUnit As String
     <DataMember()>
     Property _UnitPrice As Decimal
+    <DataMember()>
+    Property _QuantityPurchased As Integer
+
+    Public Function GetSubtotal()
+        Return _UnitPrice * (_QuantityPurchased * 1000)
+    End Function
 End Class
 
 <DataContract()>
