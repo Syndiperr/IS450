@@ -1,4 +1,4 @@
-﻿' NOTE: You can use the "Rename" command on the context menu to change the class name "Service1" in both code and config file together.
+﻿' Authors: AJ Abundez-Arce & Cody Erickson
 
 Imports System.Collections.Generic
 Imports System.Configuration
@@ -136,6 +136,7 @@ Public Class SaleService
         Dim connection As New SqlConnection(ConfigurationManager.ConnectionStrings("connectionString").ConnectionString)
         Dim insertInvoice As Boolean = False
         Try
+            connection.Open()
             Dim insertCols As String = "(OrderID, ProductCost, ShippingCost, Tax, CustomerID, CustomerName, InvoiceDate)"
             Dim insertCmd As New SqlCommand("INSERT INTO Invoices " & insertCols & " VALUES (0, @product, @shipping, @tax, @customer, @name, @date)", connection)
 
@@ -144,10 +145,11 @@ Public Class SaleService
             insertCmd.Parameters.AddWithValue("@tax", _invoice._Tax)
             insertCmd.Parameters.AddWithValue("@customer", _invoice._CustomerID)
             insertCmd.Parameters.AddWithValue("@name", _invoice._CompanyName)
-            insertCmd.Parameters.AddWithValue("@Date", _invoice._CreationDate)
+            insertCmd.Parameters.AddWithValue("@date", _invoice._CreationDate)
 
             insertInvoice = If(insertCmd.ExecuteNonQuery() = 1, True, False)
         Catch ex As Exception
+            MsgBox(ex.Message)
         Finally
             connection.Close()
         End Try

@@ -1,4 +1,5 @@
-﻿
+﻿' Authors: AJ Abundez-Arce & Cody Erickson
+
 Imports System.Collections.Generic
 ' NOTE: You can use the "Rename" command on the context menu to change the interface name "IService1" in both code and config file together.
 <ServiceContract()>
@@ -70,6 +71,7 @@ End Class
 Public Class Invoice
     <DataMember()>
     Property _ID As Integer
+    <DataMember()>
     Property _CustomerID As String
     <DataMember()>
     Property _CompanyName As String

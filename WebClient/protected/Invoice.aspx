@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <link rel="stylesheet" href="./main.css" />
     <style type="text/css">
         .auto-style1 {
@@ -16,6 +17,13 @@
             width: 187px;
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            $("#btnPrintInvoice").click(function () {
+                window.print();
+            });
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -44,7 +52,7 @@
         <br />
         <br />
         <div id="content">
-            <asp:Button ID="btnPrintInvoice" runat="server" Font-Bold="True" style="z-index: 1; left: 138px; top: 240px; position: absolute" Text="Print Invoice" />
+            <asp:Button ID="btnPrintInvoice" runat="server" Font-Bold="True" style="z-index: 1; left: 138px; top: 240px; position: absolute;" Text="Print Invoice" />
             <asp:Button ID="btnMainPage" runat="server" Font-Bold="True" PostBackUrl="~/protected/main.aspx" style="z-index: 1; left: 1064px; top: 242px; position: absolute" Text="Main Page" />
             <asp:GridView ID="GridView1" runat="server" CssClass="auto-style1">
             </asp:GridView>

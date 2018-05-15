@@ -1,4 +1,7 @@
-﻿
+﻿' Authors: AJ Abundez-Arce & Cody Erickson
+' Checkout page where the customer can see the total cost of their items being purchased
+' and later bringing them to an Invoice page
+
 Imports System.Data
 Imports System.IO
 Imports System.Net
@@ -9,11 +12,15 @@ Imports WCFCalculator
 Partial Class protected_Checkout
     Inherits System.Web.UI.Page
 
-    Dim customer As Customer
-
+    ' The connection in order to get all our Data Members
     Dim salesProxy As New SalesServiceProxy.SaleServiceClient
+
+    ' Loads the page & if the customer has a shopping cart <they had to be logged in for them to 
+    ' create a Shopping Cart>, then it changes the header to their account. Otherwise, it sends
+    ' you back into the main page
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        customer = salesProxy.GetCustomer(Page.User.Identity.Name)
+        Dim customer As Customer = salesProxy.GetCustomer(Page.User.Identity.Name)
+        ' Checks if there's a shopping cart existing in the session
         If IsNothing(Session("ShoppingCart")) Then
             Response.Redirect("~/main.aspx")
         Else
@@ -23,30 +30,37 @@ Partial Class protected_Checkout
             lblAddress.Text = customer.GetFullAddress()
             txtShipTo.Text = customer.GetFullAddress()
 
+            ' Binds the shopping cart to the list of products purchased in order to display the items purchased
             repeatSelectedProducts.DataSource = GetSelectedItems()
             repeatSelectedProducts.DataBind()
         End If
     End Sub
 
+    ' Gets the products inside the hash table & displays the subtotal
+    ' Returns the list of products purchased
     Private Function GetSelectedItems() As List(Of Product)
         Dim results As New List(Of Product)
         Dim grandSubTotal As Decimal = 0.0
 
+        ' Loop through all of the products in the shopping cart & store them inside a list
         Dim selectedItems As Hashtable = CType(Session("shoppingCart"), Hashtable)
         For Each key In selectedItems.Keys
             results.Add(CType(selectedItems.Item(key), Product))
             grandSubTotal += CType(results.Last, Product).GetSubtotal()
         Next
 
+        ' Formats it as currency
         lblSubtotal.Text = FormatCurrency(grandSubTotal)
         Return results
     End Function
 
-
+    ' Uses AJAX in order to calculate the shipping & grand total cost and displays the output in the controls
     Protected Sub btnCalculateShippingCost_Click(sender As Object, e As EventArgs) Handles btnCalculateShippingCost.Click
+        ' Gets the distance from Eau Claire to the customers address
         Dim miles As Decimal = GetDrivingDistance(txtShipFrom.Text.Trim, txtShipTo.Text.Trim)
         Dim subtotal As Decimal = CDec(lblSubtotal.Text.Substring(1, lblSubtotal.Text.Length - 1))
 
+        ' Conditions in order to calculate the shipping rate
         Dim shippingRate As Decimal
         If subtotal < 10000 Then
             shippingRate = 4.0
@@ -67,6 +81,8 @@ Partial Class protected_Checkout
         lblShippingCost.Visible = True
     End Sub
 
+    ' Uses the Google API DistanceMatrix in order to get the location based on the addresses of the origin
+    '  and destination
     Private Function GetDrivingDistance(ByVal origin As String, ByVal destination As String) As Decimal
         Try
             ' The RESTful servcie endpoint. Since this is HTTP service, the calling program simply sends the request to the service/website url.
@@ -108,7 +124,11 @@ Partial Class protected_Checkout
         Return 0
     End Function
 
+    ' Validates if the grand total was calculated (by checking if that specific control is visible) & creates a new
+    ' invoice in the database and displays the products bought in the Invoice.aspx page
     Protected Sub btnGenerateInvoice_Click(sender As Object, e As EventArgs) Handles btnGenerateInvoice.Click
+        ' Checks the customer from the database
+        Dim customer As Customer = salesProxy.GetCustomer(Page.User.Identity.Name)
         If lblGrandTotal.Visible Then
             Dim totalCost As Decimal = CDec(txtGrandTotal.Text.Substring(1, txtGrandTotal.Text.Length - 1).ToString)
             Dim shippingCost As Decimal = CDec(lblShippingCost.Text.Substring(1, lblShippingCost.Text.Length - 1).ToString)
@@ -121,8 +141,11 @@ Partial Class protected_Checkout
                 ._CompanyName = customer._CompanyName,
                 ._CreationDate = DateTime.Now
             }
+
+            ' Checks to see if creating the invoice was successful, otherwise, displays a message
+            ' notifying you of the failure
             If salesProxy.CreateInvoice(invoice) Then
-                Response.Redirect("~/Invoice.aspx")
+                Response.Redirect("Invoice.aspx")
             Else
                 MsgBox("There was an error creating an invoice. Please try again.")
             End If
